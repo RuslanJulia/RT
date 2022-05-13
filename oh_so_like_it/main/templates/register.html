@@ -1,0 +1,58 @@
+{% extends  'main_page.html' %}
+{% block title %} Регистрация {% endblock %}
+{% load static %}
+{% block content %}
+<section class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-auto">
+                <h2 class="sticky-top">Регистрация</h2>
+            </div>
+        </div>
+		<div class="container sticky-top-5 newsletter-subscribe">
+			<div class="row">
+				<div class="col align-self-start">
+                <form method="post" action="">
+                    {% csrf_token %}
+                  <div class="form-group social-media">
+                        <div class="form-group">
+                          <label class="form_label" for="exampleInputEmail1">Email</label>
+                          {{ form.email }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form_label" for="exampleInputEmail1">Имя на сайте</label>
+                            {{ form.username }}
+                          </div>
+                        <div class="form-group">
+                          <label class="form_label" for="exampleInputPassword1">Пароль</label>
+                          {{ form.password1 }}
+                          <small id="emailHelp" class="form-text form_label-2">Не менее 8 символов</small>
+                          <small id="emailHelp" class="form-text form_label-2">Цифры и латинские буквы - обязательно</small>
+                        </div>
+                        <div class="form-group">
+                            <label class="form_label" for="exampleInputPassword1">Повторение пароля</label>
+                            {{ form.password2 }}
+                          </div>
+                        <button type="submit" class="btn btn-primary">Регистрация</button>
+                        {% if form.errors %}
+                        {% for field in form %}
+                          {% for error in field.errors %}
+                              <div class="alert-danger-1">
+                                  <strong>{{ error|escape }}</strong>
+                              </div>
+                          {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert-danger-1">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                      {% endif %}
+                          </div>
+                    </form>
+              </div>
+            </div>
+          </div>
+	</section>
+
+{% endblock content %}

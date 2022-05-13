@@ -1,0 +1,55 @@
+{% extends  'main_page.html' %}
+{% block title %} Вторые блюда {% endblock %}
+{% load static %}
+{% block content %}
+	<section class="main">
+		<div class="container">
+			<div class="row">
+				<div class="col align-self-start">
+					<h3 class="sticky-top-3 social-media">Вторые блюда</h3>
+				</div>
+				<div class="col align-self-end">
+					<a class="social-media" href="{% url 'Second_Budes_With_Photos' %}"><img src="{% static 'images/photos.png' %}" class=""  alt=""><span class="sticky-top-4">C Фото</span></a>
+				</div>
+				<div class="col align-self-end">
+					<a class="social-media" href="{% url 'Second_Budes_List' %}"><img src="{% static 'images/clipboard.png' %}" class=""  alt=""><span class="sticky-top-4">Списком</span></a>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% for sub in sub_category %}
+	<section class="main">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-sm-auto">
+					<h3 class="sticky-top-4 social-media">{{ sub }}</h3>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="main" style="padding-bottom: 70px;">
+		<div class="container">
+			<div class="row">
+				<div class="row justify-content-center sticky-top-2">
+					{% for recept in recepts %}
+					{% for rec in recept %}
+					{% if sub == rec.subcategory %}
+				  <div class="col-lg-5 col-md-12 mb-4 mb-lg-0">
+					  <span class="spn">{{ rec.date }}</span>
+					  <span class="spn_2">{{ rec.name }}</span>
+					  <a href="{% url 'Recipe' pk=rec.pk %}" title="">
+					<img
+					  src="{{ rec.photo.url }}"
+					  class="w-100 shadow-1-strong rounded mb-4"
+					  alt=""
+					/></a>
+				  </div>
+				  {% endif %}
+				  {% endfor %}
+				  {% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endfor %}
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends  'main_page.html' %}
+{% block title %} Профиль {% endblock %}
+{% load static %}
+{% block content %}
+<section class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-auto">
+                <h2 class="sticky-top">Профиль</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container sticky-top-2">
+        <div class="row">
+            <div class="col align-self-end text-left">
+                <img src="{% static 'images/user-profile.svg' %}" class=""  alt="" width="245px" height="188px" style="padding-bottom: 80px;">
+            </div>
+            <div class="col text-left">
+                <span class="sticky-top-4 align-self-end "> Имя: {{ request.user.username }} <br> Email: {{ request.user.email }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-auto">
+                <h3 class="sticky-top-4 social-media">Сохраненные рецепты</h3>
+            </div>
+        </div>
+    </div>
+</section>
+{% for recept in recepts %}
+<section class="main">
+    <div class="container">
+        <div class="row">
+            <div class="row justify-content-start">
+                <div class="list-group main social-media ">
+                    <a href="{% url 'Recipe' pk=recept.pk %}" class="list-group-item list-group-item-action main"><img src="{% static 'images/star.png' %}" class=""  alt=""> 
+                        <span class="sticky-top-4"> {{ recept.name }}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% empty %}
+<section class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-auto">
+                <h7 class="sticky-top-4 social-media">У Вас нет сохраненных рецептов</h3>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+{% endblock content %}
